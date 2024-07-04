@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>DEVRENTAL | Detail Mobil</title>
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="assets/css/theme.css" rel="stylesheet" />
+    <link href="assets/css/footer.css" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #home {
+            background: #f8f9fa;
+        }
+
+        #home h1 span.text-primary {
+            color: #102C42;
+        }
+
+        #home .btn-primary {
+            background-color: #102C42;
+            border: none;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 387px;
+            margin: auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #102C42;
+            border-radius: 25px 0 0 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-button {
+            padding: 12px 20px;
+            background-color: #102C42;
+            border: 1px solid #102C42;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .img-container {
+            width: 150px;
+            height: 100px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .img-container img {
+            width: auto;
+            height: 100%;
+        }
+
+        .carousel-item {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            text-decoration: none;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-img-top {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .card-body {
+            background-color: #fff;
+            padding: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: #000;
+            border-radius: 50%;
+        }
+
+        section.listcar {
+            padding-top: 100px;
+            /* Menambahkan padding atas untuk menghindari tumpang tindih dengan navbar */
+        }
+
+        .detail-card {
+            margin: 50px auto;
+            max-width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .detail-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .detail-card h5 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            color: #000;
+        }
+
+        .detail-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .detail-card .btn {
+            background-color: #102C42;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        .detail-card .btn:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #102C42;
+            color: white;
+            padding: 40px 0;
+        }
+
+        footer h6 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: white;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer .list-unstyled {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        footer .list-unstyled li {
+            display: inline;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="main" id="top">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" data-navbar-on-scroll="data-navbar-on-scroll">
+            <div class="container">
+                <h1 class="navbar-brand d-flex align-items-center fw-semi-bold fs-3" href="index.html" style="color: black;">DEVRENTAL</h1>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+                        <li class="nav-item px-2" data-anchor="data-anchor">
+                            <a class="nav-link fw-medium active" aria-current="page" href="index.html">Beranda</a>
+                        </li>
+                        <li class="nav-item px-2" data-anchor="data-anchor">
+                            <a class="nav-link" href="#events">Daftar Mobil</a>
+                        </li>
+                        <li class="nav-item px-2" data-anchor="data-anchor">
+                            <a class="nav-link" href="#services">Kontak</a>
+                        </li>
+                        <li class="nav-item px-2" data-anchor="data-anchor">
+                            <a class="nav-link" href="#testimonial">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </main>
+
+    <section class="py-0 mt-6" id="home">
+        <div class="container">
+          <div class="row align-items-center min-vh-md-75">
+            <div class="col-md-12 col-lg-12 py-6 text-sm-start text-center">
+            
+                    <h2 class="text-center">Detail Mobil</h2>
+                    <div class="row">
+                        <div class="col">
+                            <div class="detail-card">
+                                <img src="assets/img/cars/avanza.jpg" alt="Avanza">
+                                <h5>AVANZA</h5>
+                            </div>
+                        </div>
+                        <div class="container" style="text-align: center;">
+                        <p>Harga Mulai Dari Rp. 400.000,-<br>Durasi sewa : Harian/Mingguan/Bulanan</p>
+                        <button class="btn btn-primary">Sewa</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row justify-content-between pb-2 pt-8">
+                <div class="col-12 col-lg-4 mb-5 mb-lg-0">
+                    <h6 class="text-uppercase fw-bold" style="color: white;">Alamat</h6>
+                    <p class="my-3 text-100 fw-light">Jl. Batununggal 53 Kecamatan Batununggal 48435</p>
+                </div>
+                <div class="col-12 col-lg-4 mb-5 mb-lg-0">
+                    <h6 class="text-uppercase fw-bold" style="color: white;">Kontak</h6>
+                    <p class="my-3 text-100 fw-light">+62 328478234<br>+62 328478237<br>DEVRental@gmail.com</p>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <h6 class="text-uppercase fw-bold" style="color: white;">Sosial Media</h6>
+                    <ul class="list-unstyled my-3">
+                        <li class="mb-2"><a class="text-100 text-decoration-none" href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li class="mb-2"><a class="text-100 text-decoration-none" href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li class="mb-2"><a class="text-100 text-decoration-none" href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li class="mb-2"><a class="text-100 text-decoration-none" href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="vendors/@popperjs/popper.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="vendors/is/is.min.js"></script>
+    <script src="https://scripts.sirv.com/sirv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
