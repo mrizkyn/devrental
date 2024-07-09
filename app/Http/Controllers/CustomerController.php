@@ -16,6 +16,11 @@ class CustomerController extends Controller
         // $customer = Customer::all();
         return view('customers.index');
     }
+    public function cars()
+    {
+        // $customer = Customer::all();
+        return view('customers.cars.index');
+    }
 
     /**
      * Show the form for creating a new resource.

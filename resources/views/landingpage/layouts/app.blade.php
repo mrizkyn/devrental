@@ -97,6 +97,10 @@
             width: auto;
             height: 100%;
         }
+
+        #footer {
+            background-color: #102C42;
+        }
     </style>
 </head>
 
@@ -114,7 +118,7 @@
     <!-- ============================================-->
     <!--    Footer-->
     <!-- ============================================-->
-    <section class="py-5 bg-primary text-white" id="footer">
+    <section class="py-5 text-white" id="footer">
         <div class="container">
             <div class="row justify-content-between pb-2 pt-8">
                 <div class="col-12 col-lg-4 mb-5 mb-lg-0">

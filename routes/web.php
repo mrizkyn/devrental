@@ -39,4 +39,8 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
 Route::group(['middleware' => ['auth', 'role:Customer']], function () {
     Route::get('/customer/index', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/customer/cars', [CustomerController::class, 'cars'])->name('car.index');
+    Route::get('/listcar', function () {
+        return view('landingpage.cars.index');
+    });
 });
