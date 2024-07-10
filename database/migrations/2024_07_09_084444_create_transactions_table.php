@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('status');
             $table->date('start');
             $table->date('end');
-
+            $table->string('img');
+            
             $table->timestamps();
 
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\TransactionController;
 
 
 /*
@@ -43,5 +44,13 @@ Route::group(['middleware' => ['auth', 'role:Customer']], function () {
     Route::get('/customer/index', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/customer/cars', [CustomerController::class, 'cars'])->name('car.index');
     Route::get('/customer/cars/{car}', [CarController::class, 'show'])->name('car.show');
+
+
+    Route::post('/form-step1', [TransactionController::class, 'postStep1'])->name('form.step1.post');
+    Route::post('/form-step2', [TransactionController::class, 'postStep2'])->name('form.step2.post');
+    Route::post('/form-step3', [TransactionController::class, 'postStep3'])->name('form.step3.post');
+    Route::post('/payment', [TransactionController::class, 'postPayment'])->name('payment.post');
+    
+
 
 });

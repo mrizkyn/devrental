@@ -24,6 +24,7 @@ class Transaction extends Model
         'status',
         'start',
         'end',
+        'img',
     ];
 
     public function car()
