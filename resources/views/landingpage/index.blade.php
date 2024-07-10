@@ -1,12 +1,21 @@
 @extends('landingpage.layouts.app')
 
 @section('content')
+<style>
+    #home {
+      background-color: white;
+    }
+
+
+  </style>
+
+
 <section class="py-0" id="home">
     <div class="container">
       <div class="row align-items-center min-vh-md-75 mt-7">
         <div class="col-md-6 col-lg-6 py-6 text-sm-start text-center">
-          <h1 class="mt-6 mb-sm-4 display-4 fw-light lh-sm fs-4 fs-lg-6 fs-xxl-7">SEWA MOBIL <br> <span class="fw-bold" style="color: #102C42;">BANDUNG</span></h1>
-          <p class="mb-5 fs-1 lh-lg">DEVRental Platform Sewa Mobil Termurah <br> Se-Kota <span class="fw-bold">Bandung</span></p>
+          <h1 class="mt-6 mb-sm-4 display-4 fw-light lh-sm fs-4 fs-lg-6 fs-xxl-7"  style="text-align:start;">SEWA MOBIL <br> <span class="fw-bold" style="color: #102C42;">BANDUNG</span></h1>
+          <p class="mb-5 fs-1 lh-lg"  style="text-align:start;">DEVRental Platform Sewa Mobil Termurah <br> Se-Kota <span class="fw-bold">Bandung</span></p>
           <div class="search-container" style="margin-left: 9px;">
             <input type="text" class="search-input" placeholder="Cari Mobil Kebutuhan Anda" style="color: #102C42;">
             <button class="search-button">

@@ -6,7 +6,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
-  
+use App\Http\Controllers\CarController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,19 +29,19 @@ Route::get('/listcar', function () {
 
 
 Auth::routes();
-  
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-  
+
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('cars', CarController::class);
 });
 
 Route::group(['middleware' => ['auth', 'role:Customer']], function () {
     Route::get('/customer/index', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/customer/cars', [CustomerController::class, 'cars'])->name('car.index');
-    Route::get('/listcar', function () {
-        return view('landingpage.cars.index');
-    });
+    Route::get('/customer/cars/{car}', [CarController::class, 'show'])->name('car.show');
+
 });

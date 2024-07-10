@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -18,8 +19,8 @@ class CustomerController extends Controller
     }
     public function cars()
     {
-        // $customer = Customer::all();
-        return view('customers.cars.index');
+        $cars = Car::all();
+        return view('customers.cars.index', compact('cars'));
     }
 
     /**
