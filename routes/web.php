@@ -38,18 +38,25 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
     Route::resource('cars', CarController::class);
+    Route::get('/admin/transaction', [TransactionController::class, 'index'])->name('index');
+    Route::patch('/transactions/{id}/update-status', [TransactionController::class, 'updateStatus']);
+
 });
 
 Route::group(['middleware' => ['auth', 'role:Customer']], function () {
     Route::get('/customer/index', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/customer/cars', [CustomerController::class, 'cars'])->name('car.index');
+    Route::get('/customer/history', [CustomerController::class, 'history'])->name('car.history');
     Route::get('/customer/cars/{car}', [CarController::class, 'show'])->name('car.show');
-
-
-    Route::post('/form-step1', [TransactionController::class, 'postStep1'])->name('form.step1.post');
-    Route::post('/form-step2', [TransactionController::class, 'postStep2'])->name('form.step2.post');
-    Route::post('/form-step3', [TransactionController::class, 'postStep3'])->name('form.step3.post');
+    Route::get('/form/step1/{car_id}', [TransactionController::class, 'showStep1Form'])->name('form.step1');
+    Route::post('/form/step1', [TransactionController::class, 'postStep1'])->name('form.step1.post');
+    Route::get('/form/step2/{transaction_id}', [TransactionController::class, 'showStep2Form'])->name('form.step2');
+    Route::post('/form/step2', [TransactionController::class, 'postStep2'])->name('form.step2.post');
+    Route::get('/payment/{transaction_id}', [TransactionController::class, 'showPaymentForm'])->name('payment');
     Route::post('/payment', [TransactionController::class, 'postPayment'])->name('payment.post');
+    Route::get('/confirmation/{transaction_id}', [TransactionController::class, 'confirmation'])->name('confirmation');
+
+
     
 
 

@@ -59,9 +59,8 @@
                     </div>
                     <div class="container" style="text-align: center;">
                         <p>Harga Mulai Dari Rp. {{ number_format($car->price, 0, ',', '.') }},-<br>Durasi sewa : Harian/Mingguan/Bulanan</p>
-                        <form action="{{ route('form.step1.post') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('form.step1', ['car_id' => $car->id]) }}" method="GET">
                             @csrf
-                            <input type="hidden" name="car_id" value="{{ $car->id }}">
                             <button type="submit" class="btn btn-primary">Sewa</button>
                         </form>
                     </div>

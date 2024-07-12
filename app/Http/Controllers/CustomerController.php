@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -21,6 +22,12 @@ class CustomerController extends Controller
     {
         $cars = Car::all();
         return view('customers.cars.index', compact('cars'));
+    }
+    public function history()
+    {
+        $transactions = Transaction::with('car')->get();
+
+        return view('customers.history.index',  compact('transactions'));
     }
 
     /**

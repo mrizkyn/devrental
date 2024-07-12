@@ -4,112 +4,134 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\Car;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
-    public function postStep1(Request $request)
+    public function showStep1Form($car_id)
     {
-        $request->validate([
-            'car_id' => 'required|exists:cars,id',
-        ]);
+        $car = Car::findOrFail($car_id);
+        return view('customers.form.step1', compact('car'));
+    }
 
-        // Create a new transaction with default values
-        $transaction = Transaction::create([
-            'car_id' => $request->car_id,
-            'name' => '',
-            'telp' => '',
-            'email' => '',
-            'ktp' => '',
-            'transfer' => '',
-            'status' => 'pending',
-            'start' => null,
-            'end' => null,
-            'img' => '',
-        ]);
+   // app/Http/Controllers/RentalController.php
 
-        return view('form.step2', ['transaction_id' => $transaction->id]);
+   public function postStep1(Request $request)
+   {
+       $request->validate([
+           'car_id' => 'required|exists:cars,id',
+           'name' => 'required|string',
+           'telp' => 'required|string',
+           'email' => 'required|email',
+           'ktp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+       ]);
+   
+       $transaction = new Transaction();
+       $transaction->car_id = $request->car_id;
+       $transaction->name = $request->name;
+       $transaction->telp = $request->telp;
+       $transaction->email = $request->email;
+   
+       if ($request->hasFile('ktp')) {
+           $ktpPath = $request->file('ktp')->store('ktp_images', 'public');
+           $transaction->ktp = $ktpPath;
+       }
+   
+       $transaction->status = 'pending';
+       $transaction->save();
+   
+       return redirect()->route('form.step2', ['transaction_id' => $transaction->id]);
+   }
+   
+    public function showStep2Form($transaction_id)
+    {
+        $transaction = Transaction::findOrFail($transaction_id);
+        $car = Car::findOrFail($transaction->car_id);
+        return view('customers.form.step2', compact('transaction', 'car'));
     }
 
     public function postStep2(Request $request)
+{
+    $request->validate([
+        'transaction_id' => 'required|exists:transactions,id',
+        'start' => 'required|date',
+        'end' => 'required|date|after_or_equal:start',
+        'address' => 'required|string',
+    ]);
+
+    $transaction = Transaction::findOrFail($request->transaction_id);
+    $transaction->start = $request->start;
+    $transaction->end = $request->end;
+
+    $start = Carbon::parse($request->start);
+    $end = Carbon::parse($request->end);
+    $days = $end->diffInDays($start) + 1;
+
+    $car = Car::findOrFail($transaction->car_id);
+    $transaction->price = $car->price * $days;
+    $transaction->address = $request->address;
+    $transaction->save();
+
+    return redirect()->route('payment', ['transaction_id' => $transaction->id]);
+}
+
+
+
+    public function showPaymentForm($transaction_id)
     {
-        $request->validate([
-            'transaction_id' => 'required|exists:transactions,id',
-            'name' => 'required|string|max:255',
-            'telp' => 'required|string|max:15',
-            'email' => 'required|email|max:255',
-            'ktp' => 'required|file|mimes:jpg,jpeg,png,pdf',
-        ]);
-
-        // Find the transaction and update with step 2 data
-        $transaction = Transaction::find($request->transaction_id);
-        $transaction->name = $request->name;
-        $transaction->telp = $request->telp;
-        $transaction->email = $request->email;
-
-        if ($request->hasFile('ktp')) {
-            $ktpPath = $request->file('ktp')->store('ktp');
-            $transaction->ktp = $ktpPath;
-        }
-
-        $transaction->save();
-
-        return view('form.step3', ['transaction_id' => $transaction->id]);
-    }
-
-    public function postStep3(Request $request)
-    {
-        $request->validate([
-            'transaction_id' => 'required|exists:transactions,id',
-            'start' => 'required|date',
-            'end' => 'required|date|after:start',
-            'alamat' => 'required|string|max:255',
-        ]);
-    
-        // Ambil data transaksi berdasarkan ID
-        $transaction = Transaction::find($request->transaction_id);
-    
-        // Hitung selisih hari antara start dan end date
-        $startDate = new DateTime($request->start);
-        $endDate = new DateTime($request->end);
-        $diff = $startDate->diff($endDate);
-        $days = $diff->days + 1; // Termasuk hari terakhir
-    
-        // Ambil harga mobil dari tabel cars
-        $car = Car::find($transaction->car_id);
-        $price = $car->price;
-    
-        // Hitung total harga berdasarkan harga per hari
-        $total = $price * $days;
-    
-        // Simpan data ke dalam transaksi
-        $transaction->start = $request->start;
-        $transaction->end = $request->end;
-        $transaction->transfer = $total; // Simpan total harga ke dalam transfer (atau sesuaikan dengan field yang sesuai)
-        $transaction->alamat = $request->alamat;
-        $transaction->status = 'pending';
-        $transaction->save();
-    
-        return view('payment', ['transaction_id' => $transaction->id]);
+        $transaction = Transaction::findOrFail($transaction_id);
+        return view('customers.form.payment', compact('transaction'));
     }
 
     public function postPayment(Request $request)
     {
         $request->validate([
             'transaction_id' => 'required|exists:transactions,id',
-            'bukti_transfer' => 'required|file|mimes:jpg,jpeg,png,pdf',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        // Find the transaction and update with payment data
-        $transaction = Transaction::find($request->transaction_id);
-
-        if ($request->hasFile('bukti_transfer')) {
-            $imgPath = $request->file('bukti_transfer')->store('bukti_transfer');
+    
+        $transaction = Transaction::findOrFail($request->transaction_id);
+    
+        if ($request->hasFile('img')) {
+            $imgPath = $request->file('img')->store('payment_images', 'public');
             $transaction->img = $imgPath;
         }
-
-        $transaction->status = 'completed';
+    
+        $transaction->status = 'pending';
+        $transaction->backs = 'Belum Dikembalikan';
         $transaction->save();
-
-        return redirect()->route('some.route')->with('success', 'Pembayaran berhasil');
+    
+        return redirect()->route('confirmation', ['transaction_id' => $transaction->id]);
     }
+    
+    
+
+    public function confirmation($transaction_id)
+    {
+        $transaction = Transaction::findOrFail($transaction_id);
+        return view('customers.payment.index', compact('transaction'));
+
+
+
+
+    }
+
+ public function index()
+    {
+        $transactions = Transaction::all(); // Mengambil semua transaksi
+        return view('admin.transaction.index', compact('transactions'));
+    }
+
+    public function updateStatus(Request $request, $id)
+{
+    $transaction = Transaction::findOrFail($id);
+    $transaction->status = $request->status;
+    $transaction->save();
+
+    return response()->json(['success' => true]);
 }
+
+}
+
+

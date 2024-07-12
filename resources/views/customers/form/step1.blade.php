@@ -1,8 +1,9 @@
 @extends('customers.layouts.app')
 @section('content')
-<form action="{{ route('form.step2.post') }}" method="POST" enctype="multipart/form-data">
+
+<form action="{{ route('form.step1.post') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <input type="hidden" name="transaction_id" value="{{ $transaction_id }}">
+    <input type="hidden" name="car_id" value="{{ $car->id }}">
     <div>
         <label for="name">Nama Lengkap</label>
         <input type="text" name="name" id="name" required>

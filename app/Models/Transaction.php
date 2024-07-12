@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Car; // Pastikan Anda mengimpor model Car
 
 class Transaction extends Model
 {
@@ -20,13 +21,17 @@ class Transaction extends Model
         'telp',
         'email',
         'ktp',
-        'transfer',
         'status',
+        'address',
         'start',
         'end',
         'img',
+        'price', 
     ];
 
+    /**
+     * Get the car that owns the transaction.
+     */
     public function car()
     {
         return $this->belongsTo(Car::class);

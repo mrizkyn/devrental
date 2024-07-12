@@ -1,4 +1,5 @@
 <?php
+// database/migrations/create_transactions_table.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,16 +17,17 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('car_id');
-            $table->string('name');
-            $table->string('telp');
-            $table->string('email');
-            $table->string('ktp');
-            $table->string('transfer');
-            $table->string('status');
-            $table->date('start');
-            $table->date('end');
-            $table->string('img');
-            
+            $table->string('name')->nullable();
+            $table->string('telp')->nullable();
+            $table->string('email')->nullable();
+            $table->string('ktp')->nullable();
+            $table->string('status')->nullable();
+            $table->string('backs')->nullable();
+            $table->string('address')->nullable();
+            $table->date('start')->nullable();
+            $table->date('end')->nullable();
+            $table->string('img')->nullable();
+            $table->bigInteger('price')->nullable();
             $table->timestamps();
 
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
@@ -42,3 +44,4 @@ return new class extends Migration
         Schema::dropIfExists('transactions');
     }
 };
+
