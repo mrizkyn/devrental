@@ -1,0 +1,52 @@
+body {
+    background: url('../images/backlogin.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-card {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    /* width: 400px; */
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+}
+
+.login-card h2, .login-card h3 {
+    color: white;
+}
+
+.login-card .form-group {
+    margin-bottom: 15px;
+}
+
+.login-card .form-control {
+    border-radius: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+}
+
+.login-card .btn-primary {
+    background-color: #0056b3;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.login-card .btn-link {
+    color: white;
+    text-decoration: underline;
+}
+
+.login-card p {
+    color: white;
+}
