@@ -26,7 +26,7 @@ class HomeController extends Controller
         $user = auth()->user();
 
         if ($user->hasRole('Admin')) {
-            return view('home');
+            return view('admin.index');
         } elseif ($user->hasRole('Customer')) {
             return redirect()->route('customer.index');
         } else {
