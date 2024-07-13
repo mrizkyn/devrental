@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <!-- Main content -->
         <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-md-4">
