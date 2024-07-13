@@ -29,6 +29,17 @@
     <link href="{{ asset('executive/public/assets/css/footer.css') }}" rel="stylesheet" />
 
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+
         #home {
             background: #f8f9fa;
         }
@@ -100,6 +111,7 @@
 
         #footer {
             background-color: #102C42;
+            margin-top: auto;
         }
     </style>
 </head>

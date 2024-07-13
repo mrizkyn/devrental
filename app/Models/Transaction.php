@@ -22,6 +22,8 @@ class Transaction extends Model
         'email',
         'ktp',
         'status',
+        'backs',
+        'back_img',
         'address',
         'start',
         'end',

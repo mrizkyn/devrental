@@ -38,8 +38,10 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
     Route::resource('cars', CarController::class);
-    Route::get('/admin/transaction', [TransactionController::class, 'index'])->name('index');
+    Route::get('/transaction', [TransactionController::class, 'index'])->name('index');
+    Route::get('/return', [TransactionController::class, 'return'])->name('return');
     Route::patch('/transactions/{id}/update-status', [TransactionController::class, 'updateStatus']);
+    Route::patch('/return/{id}/update-return', [TransactionController::class, 'updateReturn']);
 
 });
 
@@ -55,7 +57,8 @@ Route::group(['middleware' => ['auth', 'role:Customer']], function () {
     Route::get('/payment/{transaction_id}', [TransactionController::class, 'showPaymentForm'])->name('payment');
     Route::post('/payment', [TransactionController::class, 'postPayment'])->name('payment.post');
     Route::get('/confirmation/{transaction_id}', [TransactionController::class, 'confirmation'])->name('confirmation');
-
+    Route::get('/return-form/{transaction}', [TransactionController::class, 'showReturnForm'])->name('return.form');
+    Route::post('/return-form/{transaction}', [TransactionController::class, 'submitReturnForm'])->name('return.submit');
 
     
 

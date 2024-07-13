@@ -37,11 +37,15 @@
                                             <td>{{ $transaction->car->name }}</td>
                                             <td>{{ \Carbon\Carbon::parse($transaction->start)->format('d F Y') }} s.d {{ \Carbon\Carbon::parse($transaction->end)->format('d F Y – H:i') }}</td>
                                             <td>
-                                                <span class="badge {{ $transaction->status === 'Belum Dikembalikan' ? 'bg-danger' : 'bg-success' }}">
-                                                    {{ $transaction->status }}
+                                                <span class="badge {{ $transaction->backs === 'Belum Dikembalikan' ? 'bg-danger' : 'bg-success' }}">
+                                                    {{ $transaction->backs }}
                                                 </span>
                                             </td>
-                                            <td><a href="#" class="btn btn-primary">Pengembalian</a></td>
+                                            <td>
+                                                <a href="{{ route('return.form', $transaction->id) }}" class="btn btn-primary" {{ $transaction->backs === 'Sudah Dikembalikan' ? 'disabled' : '' }}>
+                                                    Pengembalian
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

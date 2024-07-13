@@ -71,7 +71,7 @@
         </nav>
 
         <main class="py-4">
-            <div class="container">
+            <div class="container-fluid mx-auto">
                 @yield('content')
             </div>
         </main>

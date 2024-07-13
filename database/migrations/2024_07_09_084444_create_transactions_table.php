@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('ktp')->nullable();
             $table->string('status')->nullable();
             $table->string('backs')->nullable();
+            $table->string('back_img')->nullable();
             $table->string('address')->nullable();
             $table->date('start')->nullable();
             $table->date('end')->nullable();

@@ -132,6 +132,44 @@ class TransactionController extends Controller
     return response()->json(['success' => true]);
 }
 
+public function showReturnForm(Transaction $transaction)
+{
+    return view('customers.return.index', compact('transaction'));
+}
+
+public function submitReturnForm(Request $request, Transaction $transaction)
+{
+    $request->validate([
+        'back_img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    if ($request->hasFile('back_img')) {
+        $file = $request->file('back_img');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('public/returns', $filename);
+
+        $transaction->update(['back_img' => $filename]);
+    }
+
+    return redirect()->route('car.history')->with('success', 'Pengembalian berhasil disimpan.');
+}
+
+
+public function return()
+{
+    $transactions = Transaction::all(); // Mengambil semua transaksi
+    return view('admin.return.index', compact('transactions'));
+}
+
+public function updateReturn(Request $request, $id)
+{
+    $transaction = Transaction::findOrFail($id);
+    $transaction->backs = $request->backs;
+    $transaction->save();
+
+    return response()->json(['success' => true]);
+}
+
 }
 
 
