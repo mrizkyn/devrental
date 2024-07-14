@@ -31,7 +31,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Beranda</a>
+                <a class="nav-link" href="{{ url('/home') }}">Beranda</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/customer/cars">Daftar Mobil</a>
