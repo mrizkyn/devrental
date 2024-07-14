@@ -3,6 +3,7 @@
 <style>
     /* Your existing styles */
 </style>
+@include('layouts.alert')
 <section class="py-0" id="payment">
     <div class="container">
         <div class="row align-items-center min-vh-md-75">
@@ -15,6 +16,9 @@
                                 @csrf
                                 <input type="hidden" name="transaction_id" value="{{ $transaction->id }}">
                                 <div>
+                                    <div class="container mb-1 text-start">
+                                        <p style="font-size:10px; color: rgb(180, 179, 179);">*Ukuran file tidak boleh lebih dari 2048KB</p>
+                                    </div>
                                     <label for="back_img"></label>
                                     <input type="file" name="back_img" id="back_img" required>
                                 </div>

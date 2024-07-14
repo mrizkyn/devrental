@@ -4,6 +4,7 @@
 @section('content')
 
 
+@include('layouts.alert')
     <section class="py-0" id="form1">
         <div class="container">
             <div class="row align-items-center min-vh-md-75">
@@ -28,8 +29,8 @@
                                         <input type="email" class="form-control" name="email" id="email" placeholder="E-Mail">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="ktp" class="form-label">Upload KTP/SIM</label>
-                                        <input class="form-control" type="file" name="ktp" id="ktp">
+                                        <label for="ktp" class="form-label">Upload KTP/SIM <p style="font-size:10px; color: rgb(180, 179, 179);">*Ukuran file tidak boleh lebih dari 2048KB</p></label>
+                                        <input class="form-control mb-2" type="file" name="ktp" id="ktp">
                                     </div>
                                     <div class="text-center mt-5">
                                         <button type="submit" class="btn btn-primary" style="padding: 10px 25px; border-radius:20px 20px; background-color: #102C42">Next</button>

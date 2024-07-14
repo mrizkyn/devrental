@@ -1,6 +1,7 @@
 @extends('customers.layouts.app')
 
 @section('content')
+@include('layouts.alert')
     <section class="py-0" id="form1">
         <div class="container">
             <div class="row align-items-center min-vh-md-75">
@@ -12,20 +13,20 @@
                                 <form action="{{ route('form.step2.post') }}" method="POST" style="text-align: start">
                                     @csrf
                                     <input type="hidden" name="transaction_id" value="{{ $transaction->id }}">
-                                    <div>
+                                    <div class="mb-3">
                                         <label for="start">Tanggal & Waktu Sewa</label>
                                         <input type="date" class="form-control" name="start" id="start" required>
                                     </div>
-                                    <div>
+                                    <div class="mb-3">
                                         <label for="end">Lama Sewa</label>
                                         <input type="date" class="form-control" name="end" id="end" required>
                                     </div>
-                                    <div>
+                                    <div class="mb-3">
                                         <label for="price">Kalkulasi Harga</label>
                                         <input type="text" class="form-control" name="price" id="price"
                                             value="{{ number_format($transaction->price, 0, ',', '.') }}" readonly required>
                                     </div>
-                                    <div>
+                                    <div class="mb-3">
                                         <label for="address">Alamat</label>
                                         <input type="text" class="form-control" name="address" id="address" required>
                                     </div>
