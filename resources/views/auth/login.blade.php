@@ -47,11 +47,7 @@
                 </button>
             </div>
 
-            @if (Route::has('password.request'))
-                <a class="btn btn-link" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
-                </a>
-            @endif
+
         </form>
         <p>{{ __('Belum Punya Akun?') }} <a href="{{ route('register') }}">{{ __('Register') }}</a></p>
     </div>

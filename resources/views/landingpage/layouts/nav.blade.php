@@ -34,7 +34,7 @@
                 <a class="nav-link" href="/">Beranda</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/cars">Daftar Mobil</a>
+                <a class="nav-link" href="/customer/cars">Daftar Mobil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#footer">Kontak</a>
