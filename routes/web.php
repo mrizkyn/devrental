@@ -57,10 +57,11 @@ Route::group(['middleware' => ['auth', 'role:Customer']], function () {
     Route::get('/payment/{transaction_id}', [TransactionController::class, 'showPaymentForm'])->name('payment');
     Route::post('/payment', [TransactionController::class, 'postPayment'])->name('payment.post');
     Route::get('/confirmation/{transaction_id}', [TransactionController::class, 'confirmation'])->name('confirmation');
-    Route::get('/return-form/{transaction}', [TransactionController::class, 'showReturnForm'])->name('return.form');
-    Route::post('/return-form/{transaction}', [TransactionController::class, 'submitReturnForm'])->name('return.submit');
+    Route::get('/return-form/{transaction_id}', [TransactionController::class, 'showReturnForm'])->name('return.form');
+    Route::post('/return-form', [TransactionController::class, 'submitReturnForm'])->name('return.submit');
 
-    
+
+
 
 
 });

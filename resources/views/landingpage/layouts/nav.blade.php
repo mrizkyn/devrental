@@ -31,13 +31,13 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Beranda</a>
+                <a class="nav-link" href="/">Beranda</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Daftar Mobil</a>
+                <a class="nav-link" href="/cars">Daftar Mobil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#contact">Kontak</a>
+                <a class="nav-link" href="#footer">Kontak</a>
             </li>
 
             <li class="nav-item">

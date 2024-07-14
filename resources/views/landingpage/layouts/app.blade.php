@@ -20,6 +20,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('executive/public/assets/img/favicons/favicon.ico') }}">
     <link rel="manifest" href="{{ asset('executive/public/assets/img/favicons/manifest.json') }}">
     <meta name="msapplication-TileImage" content="{{ asset('executive/public/assets/img/favicons/mstile-150x150.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <meta name="theme-color" content="#ffffff">
 
     <!-- ===============================================-->
@@ -131,20 +133,29 @@
                 </div>
                 <div class="col-12 col-lg-4 mb-5 mb-lg-0">
                     <h6 class="text-uppercase fw-bold" style="color: white;">Sosial Media</h6>
-                    <ul class="list-unstyled d-flex">
-                        <li class="me-3"><a class="text-white" href="#!">
-                                <img src="{{ asset('executive/public/assets/img/icons/facebook.svg') }}" alt="Facebook" width="24">
-                            </a></li>
-                        <li class="me-3"><a class="text-white" href="#!">
-                                <img src=" {{ asset('executive/public/assets/img/icons/twitter.svg') }}" alt="Twitter" width="24">
-                            </a></li>
-                        <li class="me-3"><a class="text-white" href="#!">
-                                <img src="{{ asset('executive/public/assets/img/icons/instagram.svg') }}" alt="Instagram" width="24">
-                            </a></li>
-                        <li class="me-3"><a class="text-white" href="#!">
-                                <img src="{{ asset('executive/public/assets/img/icons/linkedin.svg') }}" alt="LinkedIn" width="24">
-                            </a></li>
+                    <ul class="list-unstyled d-flex mt-4">
+                        <li class="me-3">
+                            <a class="text-white" href="#!">
+                                <i class="fab fa-facebook-f" style="font-size: 10pxs;"></i>
+                            </a>
+                        </li>
+                        <li class="me-3">
+                            <a class="text-white" href="#!">
+                                <i class="fab fa-twitter" style="font-size: 10pxs;"></i>
+                            </a>
+                        </li>
+                        <li class="me-3">
+                            <a class="text-white" href="#!">
+                                <i class="fab fa-instagram" style="font-size: 10pxs;"></i>
+                            </a>
+                        </li>
+                        <li class="me-3">
+                            <a class="text-white" href="#!">
+                                <i class="fab fa-linkedin-in" style="font-size: 10pxs;"></i>
+                            </a>
+                        </li>
                     </ul>
+
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@
     }
 
     .detail-card .backs.completed {
-        background-color: #28a745; 
+        background-color: #28a745;
     }
 </style>
 <section id="payment" class="py-0">
@@ -35,16 +35,26 @@
                                                 <img src="{{ asset('storage/' . $transaction->car->img) }}" alt="Car Image" class="img-fluid rounded" style="width: 100px; height: auto;">
                                             </td>
                                             <td>{{ $transaction->car->name }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($transaction->start)->format('d F Y') }} s.d {{ \Carbon\Carbon::parse($transaction->end)->format('d F Y – H:i') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($transaction->start)->format('d F Y') }} s.d {{ \Carbon\Carbon::parse($transaction->end)->format('d F Y') }} - 21:00 WIB</td>
                                             <td>
                                                 <span class="badge {{ $transaction->backs === 'Belum Dikembalikan' ? 'bg-danger' : 'bg-success' }}">
                                                     {{ $transaction->backs }}
                                                 </span>
                                             </td>
                                             <td>
-                                                <a href="{{ route('return.form', $transaction->id) }}" class="btn btn-primary" {{ $transaction->backs === 'Sudah Dikembalikan' ? 'disabled' : '' }}>
-                                                    Pengembalian
+                                                <a href="{{ route('confirmation', ['transaction_id' => $transaction->id]) }}" class="btn btn-primary btn-sm">
+                                                    Detail
                                                 </a>
+
+                                                @if ($transaction->backs === 'Sudah Dikembalikan')
+                                                    <button class="btn btn-success btn-sm" disabled>
+                                                        Pengembalian
+                                                    </button>
+                                                @else
+                                                    <a href="{{ route('return.form', $transaction->id) }}" class="btn btn-success btn-sm">
+                                                        Pengembalian
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

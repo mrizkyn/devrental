@@ -4,94 +4,101 @@
 
 <style>
     * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 </style>
 <div class="container">
-    <table id="transactions-table" class="table table-bordered">
-        <thead>
-            <tr>
-                <td>#</td>
-                <th>Nama</th>
-                <th>No Telepon</th>
-                <th>E-Mail</th>
-                <th>KTP</th>
-                <th>Tanggal & Waktu Sewa</th>
-                <th>Lama Sewa</th>
-                <th>Harga</th>
-                <th>Alamat</th>
-                <th>Mobil</th>
-                <th>Bukti Pengembalian</th>
-                <th>Status Pengembalian</th>
-                <th width="280px">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($transactions as $transaction)
-            <tr data-id="{{ $transaction->id }}">
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $transaction->name }}</td>
-                <td>{{ $transaction->telp }}</td>
-                <td>{{ $transaction->email }}</td>
-                <td>
-                    <a href="#" data-toggle="modal" data-target="#ktpModal-{{ $transaction->id }}">
-                        <img src="{{ asset('storage/' . $transaction->ktp) }}" alt="KTP Image" class="img-thumbnail" style="max-width: 100px;">
-                    </a>
-                </td>
-                <td>{{ \Carbon\Carbon::parse($transaction->start)->format('d F Y – H:i') }}</td>
-                <td>{{ \Carbon\Carbon::parse($transaction->end)->format('d F Y – H:i') }}</td>
-                <td>{{ number_format($transaction->price, 0, ',', '.') }}</td>
-                <td>{{ $transaction->address }}</td>
-                <td>{{ $transaction->car->name }}</td>
-                <td>
-                    <a href="#" data-toggle="modal" data-target="#paymentModal-{{ $transaction->id }}">
-                        <img src="{{ asset('storage/' . $transaction->back_img) }}" alt="Payment Image" class="img-thumbnail" style="max-width: 100px;">
-                    </a>
-                </td>
-                <td class="status-cell">{{ $transaction->backs }}</td>
-                <td>
-                    <a class="btn btn-success validate-btn {{ $transaction->backs === 'Sudah Dikembalikan' ? 'disabled' : '' }}" href="#" {{ $transaction->backs === 'Sudah Dikembalikan' ? 'disabled' : '' }}>Validasi</a>
-                </td>
-            </tr>
+    <div class="card">
+        <div class="card-header">
+            <h4>Daftar Pengembalian</h4>
+        </div>
+        <div class="card-body table-responsive" style="max-height: 500px; overflow-y: auto;">
+            <table id="transactions-table" class="table table-stripped" style="font-size: 12px">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nama</th>
+                        <th>No Telepon</th>
+                        <th>E-Mail</th>
+                        <th>KTP</th>
+                        <th>Tanggal & Waktu Sewa</th>
+                        <th>Lama Sewa</th>
+                        <th>Harga</th>
+                        <th>Alamat</th>
+                        <th>Mobil</th>
+                        <th>Bukti Pengembalian</th>
+                        <th>Status Pengembalian</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($transactions as $transaction)
+                    <tr data-id="{{ $transaction->id }}">
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $transaction->name }}</td>
+                        <td>{{ $transaction->telp }}</td>
+                        <td>{{ $transaction->email }}</td>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#ktpModal-{{ $transaction->id }}">
+                                <img src="{{ asset('storage/' . $transaction->ktp) }}" alt="KTP Image" class="img-thumbnail" style="max-width: 100px;">
+                            </a>
+                        </td>
+                        <td>{{ \Carbon\Carbon::parse($transaction->start)->format('d F Y – H:i') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($transaction->end)->format('d F Y – H:i') }}</td>
+                        <td>{{ number_format($transaction->price, 0, ',', '.') }}</td>
+                        <td>{{ $transaction->address }}</td>
+                        <td>{{ $transaction->car->name }}</td>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#returnModal-{{ $transaction->id }}">
+                                <img src="{{ asset('storage/' . $transaction->back_img) }}" alt="Return Image" class="img-thumbnail" style="max-width: 100px;">
+                            </a>
+                        </td>
+                        <td class="status-cell">{{ $transaction->backs }}</td>
+                        <td>
+                            <a class="btn btn-success validate-btn {{ $transaction->backs === 'Sudah Dikembalikan' ? 'disabled' : '' }}" href="#" {{ $transaction->backs === 'Sudah Dikembalikan' ? 'disabled' : '' }}>Validasi</a>
+                        </td>
+                    </tr>
 
-            <!-- KTP Modal -->
-            <div class="modal fade" id="ktpModal-{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="ktpModalLabel-{{ $transaction->id }}" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ktpModalLabel-{{ $transaction->id }}">KTP Image</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('storage/' . $transaction->ktp) }}" alt="KTP Image" class="img-fluid">
+                    <!-- KTP Modal -->
+                    <div class="modal fade" id="ktpModal-{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="ktpModalLabel-{{ $transaction->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ktpModalLabel-{{ $transaction->id }}">KTP Image</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ asset('storage/' . $transaction->ktp) }}" alt="KTP Image" class="img-fluid">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Payment Modal -->
-            <div class="modal fade" id="paymentModal-{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel-{{ $transaction->id }}" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="paymentModalLabel-{{ $transaction->id }}">Gambar Pengembalian</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ asset('storage/' . $transaction->back_img) }}" alt="Return Image" class="img-fluid">
+                    <!-- Return Modal -->
+                    <div class="modal fade" id="returnModal-{{ $transaction->id }}" tabindex="-1" role="dialog" aria-labelledby="returnModalLabel-{{ $transaction->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="returnModalLabel-{{ $transaction->id }}">Gambar Pengembalian</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ asset('storage/' . $transaction->back_img) }}" alt="Return Image" class="img-fluid">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            @endforeach
-        </tbody>
-    </table>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <!-- Modal Validasi -->

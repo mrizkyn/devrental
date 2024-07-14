@@ -45,7 +45,7 @@
     }
 </style>
 
-<section class="py-0 mt-6" id="home">
+<section class="py-0 mt-6" id="home" style="background-color: white">
     <div class="container">
         <div class="row align-items-center min-vh-md-75">
             <div class="col-md-12 col-lg-12 py-6 text-sm-start text-center">

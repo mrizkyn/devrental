@@ -1,8 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <table id="transactions-table" class="table table-bordered">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+</style>
+
+<div class="container">
+<div class="card">
+    <div class="card-header">
+        <h4>Daftar Transaksi</h4>
+    </div>
+    <div class="card-body table-responsive" style="max-height: 500px; overflow-y: auto;">
+        <table id="transactions-table" class="table table-stripped" style="font-size: 12px">
             <thead>
                 <tr>
                     <td>#</td>
@@ -17,7 +30,7 @@
                     <th>Mobil</th>
                     <th>Bukti Pembayaran</th>
                     <th>Status</th>
-                    <th width="280px">Action</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +61,7 @@
                         <td>
                             <a class="btn btn-success validate-btn {{ $transaction->status === 'complete' ? 'disabled' : '' }}" href="#" {{ $transaction->status === 'complete' ? 'disabled' : '' }}>Validasi</a>
                         </td>
-                        
+
 
                     </tr>
 
@@ -160,7 +173,7 @@
                 $('#validationModal').modal('hide');
                 var row = $('#transactions-table').find('tr[data-id="' + id + '"]');
                 row.find('td.status-cell').html('<span class="badge badge-' + (status === 'complete' ? 'success' : 'danger') + '">' + status + '</span>');
-                
+
                 // Update the validation button
                 var validateBtn = row.find('.validate-btn');
                 if (status === 'complete') {
@@ -173,6 +186,6 @@
         });
     }
 });
-
-    </script>
+</script>
+</div>
 @endsection

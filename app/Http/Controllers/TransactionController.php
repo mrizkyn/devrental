@@ -26,24 +26,24 @@ class TransactionController extends Controller
            'email' => 'required|email',
            'ktp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
        ]);
-   
+
        $transaction = new Transaction();
        $transaction->car_id = $request->car_id;
        $transaction->name = $request->name;
        $transaction->telp = $request->telp;
        $transaction->email = $request->email;
-   
+
        if ($request->hasFile('ktp')) {
            $ktpPath = $request->file('ktp')->store('ktp_images', 'public');
            $transaction->ktp = $ktpPath;
        }
-   
+
        $transaction->status = 'pending';
        $transaction->save();
-   
+
        return redirect()->route('form.step2', ['transaction_id' => $transaction->id]);
    }
-   
+
     public function showStep2Form($transaction_id)
     {
         $transaction = Transaction::findOrFail($transaction_id);
@@ -90,22 +90,22 @@ class TransactionController extends Controller
             'transaction_id' => 'required|exists:transactions,id',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
+
         $transaction = Transaction::findOrFail($request->transaction_id);
-    
+
         if ($request->hasFile('img')) {
             $imgPath = $request->file('img')->store('payment_images', 'public');
             $transaction->img = $imgPath;
         }
-    
+
         $transaction->status = 'pending';
         $transaction->backs = 'Belum Dikembalikan';
         $transaction->save();
-    
+
         return redirect()->route('confirmation', ['transaction_id' => $transaction->id]);
     }
-    
-    
+
+
 
     public function confirmation($transaction_id)
     {
@@ -117,9 +117,10 @@ class TransactionController extends Controller
 
     }
 
- public function index()
+    public function index()
     {
-        $transactions = Transaction::all(); // Mengambil semua transaksi
+        $transactions = Transaction::orderBy('created_at', 'desc')->get();
+
         return view('admin.transaction.index', compact('transactions'));
     }
 
@@ -132,24 +133,36 @@ class TransactionController extends Controller
     return response()->json(['success' => true]);
 }
 
-public function showReturnForm(Transaction $transaction)
+public function showReturnForm($transaction_id)
 {
+    $transaction = Transaction::findOrFail($transaction_id);
+
     return view('customers.return.index', compact('transaction'));
 }
 
-public function submitReturnForm(Request $request, Transaction $transaction)
+public function submitReturnForm(Request $request)
 {
     $request->validate([
+        'transaction_id' => 'required|exists:transactions,id',
         'back_img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ], [
+        'transaction_id.required' => 'ID transaksi wajib diisi.',
+        'transaction_id.exists' => 'ID transaksi tidak ditemukan.',
+        'back_img.required' => 'Bukti transfer wajib diupload.',
+        'back_img.image' => 'File harus berupa gambar.',
+        'back_img.mimes' => 'Format gambar harus jpeg, png, jpg, atau gif.',
+        'back_img.max' => 'Ukuran gambar maksimal 2MB.',
     ]);
 
-    if ($request->hasFile('back_img')) {
-        $file = $request->file('back_img');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/returns', $filename);
+    $transaction = Transaction::findOrFail($request->transaction_id);
 
-        $transaction->update(['back_img' => $filename]);
+    if ($request->hasFile('back_img')) {
+        $imgPath = $request->file('back_img')->store('returns', 'public');
+        $transaction->back_img = $imgPath;
     }
+
+    $transaction->backs = 'Belum Dikembalikan';
+    $transaction->save();
 
     return redirect()->route('car.history')->with('success', 'Pengembalian berhasil disimpan.');
 }
@@ -157,7 +170,8 @@ public function submitReturnForm(Request $request, Transaction $transaction)
 
 public function return()
 {
-    $transactions = Transaction::all(); // Mengambil semua transaksi
+    $transactions = Transaction::orderBy('created_at', 'desc')->get();
+
     return view('admin.return.index', compact('transactions'));
 }
 

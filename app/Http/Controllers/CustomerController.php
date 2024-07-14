@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        // $customer = Customer::all();
+
         return view('customers.index');
     }
     public function cars()
@@ -25,10 +25,11 @@ class CustomerController extends Controller
     }
     public function history()
     {
-        $transactions = Transaction::with('car')->get();
+        $transactions = Transaction::with('car')->orderBy('created_at', 'desc')->get();
 
-        return view('customers.history.index',  compact('transactions'));
+        return view('customers.history.index', compact('transactions'));
     }
+
 
     /**
      * Show the form for creating a new resource.

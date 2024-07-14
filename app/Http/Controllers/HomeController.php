@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
+use App\Models\Car;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,13 +27,19 @@ class HomeController extends Controller
     {
         $user = auth()->user();
 
+        $totalTransactions = Transaction::where('status', 'Complete')->sum('price');
+
+        $totalCars = Car::count();
+
         if ($user->hasRole('Admin')) {
-            return view('admin.index');
+            return view('admin.index', compact('totalTransactions', 'totalCars'));
         } elseif ($user->hasRole('Customer')) {
             return redirect()->route('customer.index');
         } else {
             return view('home', compact('customer'));
         }
     }
+
+
 
 }
