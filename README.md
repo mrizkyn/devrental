@@ -90,43 +90,21 @@ Ensure you have the following installed:
     Install PHP Dependencies
     ```
 
-bash
-composer install
-Configure Environment
+1. composer install
+2. Configure Environment
+3. cp .env.example .env
+4. php artisan key:generate
+5. Update Environment Variables
+6. Edit .env file with your database credentials
+7.php artisan migrate --seed
+8. Create Storage Link
+9. php artisan storage:link
+10. php artisan serve
 
-bash
-cp .env.example .env
-php artisan key:generate
-Update Environment Variables
-Edit .env file with your database credentials:
 
-env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=devrental
-DB_USERNAME=root
-DB_PASSWORD=yourpassword
-Run Database Migrations
-
-bash
-php artisan migrate --seed
-Create Storage Link
-
-bash
-php artisan storage:link
-Set Permissions
-
-bash
-chmod -R 775 storage bootstrap/cache
-Start Development Server
-
-bash
-php artisan serve
 Access the Application
 
-Open browser and navigate to: http://localhost:8000
-
+1. Open browser and navigate to: http://localhost:8000
 Default Admin Login: admin@gmail.com / 123123123
 
 📱 Usage
