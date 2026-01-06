@@ -16,6 +16,12 @@
 
 ## 📖 Overview
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c36bd0d1-5e9f-4e0d-a42f-51b3ff5c0803" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/20d8072b-d6da-451a-b9ab-2e173e3bcfdd" />
+
+
+
 DEVRENTAL is a comprehensive web-based car rental management system built with Laravel, designed to streamline vehicle rental operations in Bandung, Indonesia. The platform provides separate interfaces for administrators and customers, featuring role-based access control, transaction management, and a seamless rental process.
 
 **Tagline**: _"Dedkar Mobil - Tersedia jenis mobil baik transmisi manual maupun matic sesuai dengan kebutuhan"_
